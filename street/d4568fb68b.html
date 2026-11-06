@@ -14,53 +14,96 @@
   <script src="/kz-zillow/static/vendor/leaflet.js"></script>
 </head>
 <body data-ptype="apartment">
-<header class="top">
-  <a class="brand" href="/kz-zillow/index.html"><img class="logo" src="/kz-zillow/static/logo.svg" alt=""><span class="bn"><b><span class="ru">Исследование рынка недвижимости</span><span class="en">Property Market Research</span></b><small><span class="ru">Алматы</span><span class="en">Almaty</span></small></span></a>
-  <div class="search">
-    <input type="search" name="q" placeholder="Улица или микрорайон…" maxlength="80"
-           autocomplete="off" aria-label="Search">
-    <div id="results"></div>
-  </div>
-  <button id="lang" class="lang" type="button" title="Русский / English" aria-label="Language"><span class="ru">EN</span><span class="en">RU</span></button>
-</header>
-<main>
+<!-- icon sprite: <svg class="ic"><use href="#i-home"/></svg> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.3"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 3h7v7M10 14L21 3M19 14v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></symbol>
+  <symbol id="i-deals" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h12"/></symbol>
+</svg>
 
-<div class="hero">
-<div class="eyebrow"><span class="ru">Улица · сделки и цены</span><span class="en">Street · sales and prices</span></div>
-<h1><span class="ru">улица Закарпатская</span><span class="en">St. Zakarpatskaya</span> <span class="muted">· <span class="ru">Турксибский район</span><span class="en">Turksib district</span></span></h1>
-<nav class="toggle">
-  
-  <a href="/kz-zillow/street/d4568fb68b.html" class="on"><span class="ru">Квартиры</span><span class="en">Apartments</span></a>
-  
-  <a href="/kz-zillow/street/d4568fb68b-house.html" class=""><span class="ru">Дома</span><span class="en">Houses</span></a>
-  
-  <a href="/kz-zillow/district/turksib.html">← <span class="ru">Турксибский</span><span class="en">Turksib</span></a>
-  <a href="/kz-zillow/index.html">← <span class="ru">весь город</span><span class="en">whole city</span></a>
-</nav>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="/kz-zillow/index.html"><img class="logo" src="/kz-zillow/static/logo.svg" alt=""><span class="bn"><b><span class="ru">Исследование рынка недвижимости</span><span class="en">Property Market Research</span></b><small><span class="ru">Алматы</span><span class="en">Almaty</span></small></span></a>
+    <nav class="nav">
+      <a href="/kz-zillow/index.html"><svg class="ic"><use href="#i-home"/></svg><span class="ru">Главная</span><span class="en">Home</span></a>
+      <a href="/kz-zillow/index.html#districts"><svg class="ic"><use href="#i-pin"/></svg><span class="ru">Районы</span><span class="en">Districts</span></a>
+      <a href="/kz-zillow/index.html#streets"><svg class="ic"><use href="#i-list"/></svg><span class="ru">Улицы</span><span class="en">Streets</span></a>
+      <a href="/kz-zillow/index.html#mapsec"><svg class="ic"><use href="#i-map"/></svg><span class="ru">Карта</span><span class="en">Map</span></a>
+    </nav>
+    <a class="cta" href="https://ashyq.data.gov.kz" rel="noopener"><svg class="ic"><use href="#i-external"/></svg><span class="ru">Источник данных</span><span class="en">Data source</span></a>
+    <button id="lang" class="lang" type="button" title="Русский / English" aria-label="Language"><span class="ru">EN</span><span class="en">RU</span></button>
+  </div>
+</header>
+
+<section class="findband">
+  <div class="wrap">
+    <div class="findrow">
+      <div class="search">
+        <svg class="ic sic"><use href="#i-search"/></svg>
+        <input type="search" name="q" placeholder="Поиск по адресу или улице, например: Утепова 31" maxlength="80" autocomplete="off" aria-label="Search">
+        <div id="results"></div>
+      </div>
+      <button type="button" id="findbtn" class="findbtn"><span class="ru">Найти</span><span class="en">Find</span></button>
+    </div>
+    <div class="try"><span class="ru">Например:</span><span class="en">Try:</span>
+      <button type="button" class="chip" data-q="Утепова 31">Утепова 31</button>
+      <button type="button" class="chip" data-q="Шугыла 340/35">Шугыла 340/35</button>
+      <button type="button" class="chip" data-q="Абая">Абая</button>
+      <span class="hint"><span class="ru">Вводите по-русски: улица и номер дома</span><span class="en">Type in Russian: street and house number</span></span>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+
+<div class="crumbs">
+  <a href="/kz-zillow/index.html"><span class="ru">Главная</span><span class="en">Home</span></a> › <a href="/kz-zillow/index.html"><span class="ru">Алматы</span><span class="en">Almaty</span></a> ›
+  <a href="/kz-zillow/district/turksib.html"><span class="ru">Турксибский</span><span class="en">Turksib</span></a> › <span class="ru">улица Закарпатская</span><span class="en">St. Zakarpatskaya</span>
+</div>
+<div class="pagehead">
+  <h1><span class="ru">улица Закарпатская</span><span class="en">St. Zakarpatskaya</span> <span class="muted">· <span class="ru">Турксибский район</span><span class="en">Turksib district</span></span></h1>
+  <nav class="toggle">
+    
+    <a href="/kz-zillow/street/d4568fb68b.html" class="on"><svg class="ic"><use href="#i-building"/></svg><span class="ru">Квартиры</span><span class="en">Apartments</span></a>
+    
+    <a href="/kz-zillow/street/d4568fb68b-house.html" class=""><svg class="ic"><use href="#i-home"/></svg><span class="ru">Дома</span><span class="en">Houses</span></a>
+    
+  </nav>
 </div>
 
 <section class="stats">
-  <div><span class="k"><span class="ru">Медиана, ₸/м²</span><span class="en">Median, ₸/m²</span> (2026Q2)</span><span class="v">523 179</span></div>
-  <div><span class="k"><span class="ru">К прошлому кварталу</span><span class="en">vs previous quarter</span></span><span class="v down">-2.9%</span></div>
-  <div><span class="k"><span class="ru">Сделок в этом квартале</span><span class="en">Deals this quarter</span></span><span class="v">5</span></div>
-  <div><span class="k"><span class="ru">Всего сделок (в индексе)</span><span class="en">Total deals (in the index)</span></span><span class="v">304</span></div>
+  <div class="tile"><svg class="ic"><use href="#i-tag"/></svg><span class="k"><span class="ru">Медиана, ₸/м²</span><span class="en">Median, ₸/m²</span> (2026Q2)</span><span class="v">523 179</span></div>
+  <div class="tile"><svg class="ic"><use href="#i-trend"/></svg><span class="k"><span class="ru">К прошлому кварталу</span><span class="en">vs previous quarter</span></span><span class="v down">-2.9%</span></div>
+  <div class="tile"><svg class="ic"><use href="#i-calendar"/></svg><span class="k"><span class="ru">Сделок в этом квартале</span><span class="en">Deals this quarter</span></span><span class="v">5</span></div>
+  <div class="tile"><svg class="ic"><use href="#i-deals"/></svg><span class="k"><span class="ru">Всего сделок (в индексе)</span><span class="en">Total deals (in the index)</span></span><span class="v">304</span></div>
 </section>
 <p class="muted note">
   <span class="ru">Здесь — улица или микрорайон целиком. Даты — даты регистрации, а не подписания договора; номера квартир не публикуются.</span>
   <span class="en">This is the whole street or microdistrict. Dates are registration dates, not contract-signing dates; flat numbers are not published.</span>
 </p>
 
+
+
 <section class="card">
-  <h2><span class="ru">Медианная цена за м² по кварталам</span><span class="en">Median price per m² by quarter</span></h2>
+  <h2 class="sech"><svg class="ic"><use href="#i-chart"/></svg><span class="ru">Медианная цена за м² по кварталам</span><span class="en">Median price per m² by quarter</span></h2>
   
   <div class="chartbox"><canvas id="chart" data-chart='{&#34;labels&#34;: [&#34;2001Q2&#34;, &#34;2001Q4&#34;, &#34;2002Q3&#34;, &#34;2003Q3&#34;, &#34;2004Q4&#34;, &#34;2006Q4&#34;, &#34;2008Q3&#34;, &#34;2008Q4&#34;, &#34;2009Q1&#34;, &#34;2009Q2&#34;, &#34;2009Q3&#34;, &#34;2010Q1&#34;, &#34;2010Q2&#34;, &#34;2010Q4&#34;, &#34;2011Q1&#34;, &#34;2011Q2&#34;, &#34;2011Q3&#34;, &#34;2011Q4&#34;, &#34;2012Q2&#34;, &#34;2012Q3&#34;, &#34;2012Q4&#34;, &#34;2013Q1&#34;, &#34;2013Q2&#34;, &#34;2013Q3&#34;, &#34;2013Q4&#34;, &#34;2014Q2&#34;, &#34;2014Q3&#34;, &#34;2014Q4&#34;, &#34;2015Q3&#34;, &#34;2015Q4&#34;, &#34;2016Q1&#34;, &#34;2016Q2&#34;, &#34;2016Q3&#34;, &#34;2017Q1&#34;, &#34;2017Q2&#34;, &#34;2017Q3&#34;, &#34;2017Q4&#34;, &#34;2018Q1&#34;, &#34;2018Q2&#34;, &#34;2018Q4&#34;, &#34;2019Q1&#34;, &#34;2019Q2&#34;, &#34;2019Q3&#34;, &#34;2019Q4&#34;, &#34;2020Q1&#34;, &#34;2020Q2&#34;, &#34;2020Q3&#34;, &#34;2020Q4&#34;, &#34;2021Q1&#34;, &#34;2021Q2&#34;, &#34;2021Q3&#34;, &#34;2021Q4&#34;, &#34;2022Q1&#34;, &#34;2022Q2&#34;, &#34;2022Q3&#34;, &#34;2022Q4&#34;, &#34;2023Q1&#34;, &#34;2023Q2&#34;, &#34;2023Q3&#34;, &#34;2023Q4&#34;, &#34;2024Q1&#34;, &#34;2024Q2&#34;, &#34;2024Q3&#34;, &#34;2024Q4&#34;, &#34;2025Q1&#34;, &#34;2025Q2&#34;, &#34;2025Q3&#34;, &#34;2025Q4&#34;, &#34;2026Q1&#34;, &#34;2026Q2&#34;, &#34;2026Q3&#34;], &#34;median&#34;: [11391, 13947, 13661, 28058, 45965, 161260, 151376, 145538, 178466, 138491, 159091, 126026, 209574, 126904, 149718, 191882, 138931, 242896, 252012, 217166, 205659, 194250, 257827, 230625, 226055, 278666, 264516, 296525, 258135, 247621, 384343, 237252, 317050, 224586, 269672, 250840, 308509, 444587, 261194, 306122, 265674, 303430, 234708, 319829, 280561, 287004, 352349, 327661, 313800, 350610, 354549, 435514, 462724, 439484, 492604, 456551, 481282, 479319, 521994, 510806, 455531, 554700, 499520, 550368, 474198, 537109, 631263, 545852, 538600, 523179, 428850], &#34;n&#34;: [2, 3, 1, 1, 1, 3, 1, 1, 1, 5, 5, 3, 1, 1, 2, 1, 3, 1, 1, 3, 4, 2, 1, 1, 3, 6, 5, 1, 3, 2, 2, 1, 5, 1, 5, 2, 2, 2, 3, 3, 2, 4, 3, 5, 3, 4, 1, 4, 11, 3, 12, 13, 12, 6, 13, 12, 8, 9, 3, 7, 11, 9, 8, 4, 5, 5, 7, 13, 7, 5, 1], &#34;rows&#34;: [{&#34;median_ppm2&#34;: 11391.320721667542, &#34;n&#34;: 2, &#34;qoq_pct&#34;: null, &#34;quarter&#34;: &#34;2001Q2&#34;}, {&#34;median_ppm2&#34;: 13946.869070208728, &#34;n&#34;: 3, &#34;qoq_pct&#34;: 22.4341708128738, &#34;quarter&#34;: &#34;2001Q4&#34;}, {&#34;median_ppm2&#34;: 13661.393596986816, &#34;n&#34;: 1, &#34;qoq_pct&#34;: -2.0468785631013287, &#34;quarter&#34;: &#34;2002Q3&#34;}, {&#34;median_ppm2&#34;: 28057.53086419753, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 105.37824830979146, &#34;quarter&#34;: &#34;2003Q3&#34;}, {&#34;median_ppm2&#34;: 45964.912280701756, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 63.82379655279902, &#34;quarter&#34;: &#34;2004Q4&#34;}, {&#34;median_ppm2&#34;: 161259.84251968504, &#34;n&#34;: 3, &#34;qoq_pct&#34;: 250.83248181763537, &#34;quarter&#34;: &#34;2006Q4&#34;}, {&#34;median_ppm2&#34;: 151376.14678899082, &#34;n&#34;: 1, &#34;qoq_pct&#34;: -6.129049598623859, &#34;quarter&#34;: &#34;2008Q3&#34;}, {&#34;median_ppm2&#34;: 145537.75743707092, &#34;n&#34;: 1, &#34;qoq_pct&#34;: -3.8568753900561803, &#34;quarter&#34;: &#34;2008Q4&#34;}, {&#34;median_ppm2&#34;: 178466.0766961652, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 22.625275968905978, &#34;quarter&#34;: &#34;2009Q1&#34;}, {&#34;median_ppm2&#34;: 138491.12426035505, &#34;n&#34;: 5, &#34;qoq_pct&#34;: -22.399188224363044, &#34;quarter&#34;: &#34;2009Q2&#34;}, {&#34;median_ppm2&#34;: 159090.9090909091, &#34;n&#34;: 5, &#34;qoq_pct&#34;: 14.874444077605787, &#34;quarter&#34;: &#34;2009Q3&#34;}, {&#34;median_ppm2&#34;: 126026.20087336245, &#34;n&#34;: 3, &#34;qoq_pct&#34;: -20.783530879600743, &#34;quarter&#34;: &#34;2010Q1&#34;}, {&#34;median_ppm2&#34;: 209574.46808510637, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 66.29436310287373, &#34;quarter&#34;: &#34;2010Q2&#34;}, {&#34;median_ppm2&#34;: 126903.55329949239, &#34;n&#34;: 1, &#34;qoq_pct&#34;: -39.44703548146048, &#34;quarter&#34;: &#34;2010Q4&#34;}, {&#34;median_ppm2&#34;: 149717.54567691693, &#34;n&#34;: 2, &#34;qoq_pct&#34;: 17.977425993410545, &#34;quarter&#34;: &#34;2011Q1&#34;}, {&#34;median_ppm2&#34;: 191881.65680473374, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 28.16243810114607, &#34;quarter&#34;: &#34;2011Q2&#34;}, {&#34;median_ppm2&#34;: 138930.8996088657, &#34;n&#34;: 3, &#34;qoq_pct&#34;: -27.59552845103521, &#34;quarter&#34;: &#34;2011Q3&#34;}, {&#34;median_ppm2&#34;: 242895.59118236473, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 74.83194297754669, &#34;quarter&#34;: &#34;2011Q4&#34;}, {&#34;median_ppm2&#34;: 252012.3839009288, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 3.7533792499836904, &#34;quarter&#34;: &#34;2012Q2&#34;}, {&#34;median_ppm2&#34;: 217166.37478108582, &#34;n&#34;: 3, &#34;qoq_pct&#34;: -13.827101898905758, &#34;quarter&#34;: &#34;2012Q3&#34;}, {&#34;median_ppm2&#34;: 205658.52113587604, &#34;n&#34;: 4, &#34;qoq_pct&#34;: -5.299095523793795, &#34;quarter&#34;: &#34;2012Q4&#34;}, {&#34;median_ppm2&#34;: 194249.686716792, &#34;n&#34;: 2, &#34;qoq_pct&#34;: -5.547464970608418, &#34;quarter&#34;: &#34;2013Q1&#34;}, {&#34;median_ppm2&#34;: 257827.16417910447, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 32.72977091335329, &#34;quarter&#34;: &#34;2013Q2&#34;}, {&#34;median_ppm2&#34;: 230625.0, &#34;n&#34;: 1, &#34;qoq_pct&#34;: -10.550542362637927, &#34;quarter&#34;: &#34;2013Q3&#34;}, {&#34;median_ppm2&#34;: 226054.89614243322, &#34;n&#34;: 3, &#34;qoq_pct&#34;: -1.981616848809442, &#34;quarter&#34;: &#34;2013Q4&#34;}, {&#34;median_ppm2&#34;: 278666.410944892, &#34;n&#34;: 6, &#34;qoq_pct&#34;: 23.273778051376137, &#34;quarter&#34;: &#34;2014Q2&#34;}, {&#34;median_ppm2&#34;: 264516.12903225806, &#34;n&#34;: 5, &#34;qoq_pct&#34;: -5.0778570207488105, &#34;quarter&#34;: &#34;2014Q3&#34;}, {&#34;median_ppm2&#34;: 296525.29761904763, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 12.101027148664345, &#34;quarter&#34;: &#34;2014Q4&#34;}, {&#34;median_ppm2&#34;: 258135.16896120147, &#34;n&#34;: 3, &#34;qoq_pct&#34;: -12.946662212667858, &#34;quarter&#34;: &#34;2015Q3&#34;}, {&#34;median_ppm2&#34;: 247620.88837913994, &#34;n&#34;: 2, &#34;qoq_pct&#34;: -4.073168574578023, &#34;quarter&#34;: &#34;2015Q4&#34;}, {&#34;median_ppm2&#34;: 384342.5319274019, &#34;n&#34;: 2, &#34;qoq_pct&#34;: 55.214099441773776, &#34;quarter&#34;: &#34;2016Q1&#34;}, {&#34;median_ppm2&#34;: 237252.12464589236, &#34;n&#34;: 1, &#34;qoq_pct&#34;: -38.27065574654988, &#34;quarter&#34;: &#34;2016Q2&#34;}, {&#34;median_ppm2&#34;: 317050.3597122302, &#34;n&#34;: 5, &#34;qoq_pct&#34;: 33.63436057124449, &#34;quarter&#34;: &#34;2016Q3&#34;}, {&#34;median_ppm2&#34;: 224586.28841607567, &#34;n&#34;: 1, &#34;qoq_pct&#34;: -29.163843680883783, &#34;quarter&#34;: &#34;2017Q1&#34;}, {&#34;median_ppm2&#34;: 269671.676300578, &#34;n&#34;: 5, &#34;qoq_pct&#34;: 20.07486218436261, &#34;quarter&#34;: &#34;2017Q2&#34;}, {&#34;median_ppm2&#34;: 250840.0, &#34;n&#34;: 2, &#34;qoq_pct&#34;: -6.983186576697831, &#34;quarter&#34;: &#34;2017Q3&#34;}, {&#34;median_ppm2&#34;: 308509.33202357567, &#34;n&#34;: 2, &#34;qoq_pct&#34;: 22.990484780567556, &#34;quarter&#34;: &#34;2017Q4&#34;}, {&#34;median_ppm2&#34;: 444586.5384615385, &#34;n&#34;: 2, &#34;qoq_pct&#34;: 44.10797091465748, &#34;quarter&#34;: &#34;2018Q1&#34;}, {&#34;median_ppm2&#34;: 261194.02985074627, &#34;n&#34;: 3, &#34;qoq_pct&#34;: -41.250126296088396, &#34;quarter&#34;: &#34;2018Q2&#34;}, {&#34;median_ppm2&#34;: 306122.44897959183, &#34;n&#34;: 3, &#34;qoq_pct&#34;: 17.201166180758023, &#34;quarter&#34;: &#34;2018Q4&#34;}, {&#34;median_ppm2&#34;: 265673.76932340435, &#34;n&#34;: 2, &#34;qoq_pct&#34;: -13.21323535435458, &#34;quarter&#34;: &#34;2019Q1&#34;}, {&#34;median_ppm2&#34;: 303430.0534300534, &#34;n&#34;: 4, &#34;qoq_pct&#34;: 14.211521221234435, &#34;quarter&#34;: &#34;2019Q2&#34;}, {&#34;median_ppm2&#34;: 234708.39260312947, &#34;n&#34;: 3, &#34;qoq_pct&#34;: -22.648271010098085, &#34;quarter&#34;: &#34;2019Q3&#34;}, {&#34;median_ppm2&#34;: 319829.4243070363, &#34;n&#34;: 5, &#34;qoq_pct&#34;: 36.2667183562706, &#34;quarter&#34;: &#34;2019Q4&#34;}, {&#34;median_ppm2&#34;: 280561.122244489, &#34;n&#34;: 3, &#34;qoq_pct&#34;: -12.277889111556451, &#34;quarter&#34;: &#34;2020Q1&#34;}, {&#34;median_ppm2&#34;: 287004.0170519757, &#34;n&#34;: 4, &#34;qoq_pct&#34;: 2.2964317920970645, &#34;quarter&#34;: &#34;2020Q2&#34;}, {&#34;median_ppm2&#34;: 352348.9932885906, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 22.767965726689134, &#34;quarter&#34;: &#34;2020Q3&#34;}, {&#34;median_ppm2&#34;: 327660.7264118047, &#34;n&#34;: 4, &#34;qoq_pct&#34;: -7.00676526598305, &#34;quarter&#34;: &#34;2020Q4&#34;}, {&#34;median_ppm2&#34;: 313799.62192816637, &#34;n&#34;: 11, &#34;qoq_pct&#34;: -4.230322210241832, &#34;quarter&#34;: &#34;2021Q1&#34;}, {&#34;median_ppm2&#34;: 350609.756097561, &#34;n&#34;: 3, &#34;qoq_pct&#34;: 11.730458419042012, &#34;quarter&#34;: &#34;2021Q2&#34;}, {&#34;median_ppm2&#34;: 354548.8816285499, &#34;n&#34;: 12, &#34;qoq_pct&#34;: 1.1235071079690018, &#34;quarter&#34;: &#34;2021Q3&#34;}, {&#34;median_ppm2&#34;: 435514.0186915888, &#34;n&#34;: 13, &#34;qoq_pct&#34;: 22.83609997333558, &#34;quarter&#34;: &#34;2021Q4&#34;}, {&#34;median_ppm2&#34;: 462724.46106264135, &#34;n&#34;: 12, &#34;qoq_pct&#34;: 6.247891274039974, &#34;quarter&#34;: &#34;2022Q1&#34;}, {&#34;median_ppm2&#34;: 439483.55254087737, &#34;n&#34;: 6, &#34;qoq_pct&#34;: -5.022623716150965, &#34;quarter&#34;: &#34;2022Q2&#34;}, {&#34;median_ppm2&#34;: 492603.550295858, &#34;n&#34;: 13, &#34;qoq_pct&#34;: 12.086913707661417, &#34;quarter&#34;: &#34;2022Q3&#34;}, {&#34;median_ppm2&#34;: 456550.58043117746, &#34;n&#34;: 12, &#34;qoq_pct&#34;: -7.318861149706923, &#34;quarter&#34;: &#34;2022Q4&#34;}, {&#34;median_ppm2&#34;: 481281.9222470948, &#34;n&#34;: 8, &#34;qoq_pct&#34;: 5.416999315291737, &#34;quarter&#34;: &#34;2023Q1&#34;}, {&#34;median_ppm2&#34;: 479318.73479318735, &#34;n&#34;: 9, &#34;qoq_pct&#34;: -0.4079079980277234, &#34;quarter&#34;: &#34;2023Q2&#34;}, {&#34;median_ppm2&#34;: 521994.1348973607, &#34;n&#34;: 3, &#34;qoq_pct&#34;: 8.903344894830067, &#34;quarter&#34;: &#34;2023Q3&#34;}, {&#34;median_ppm2&#34;: 510805.5009823183, &#34;n&#34;: 7, &#34;qoq_pct&#34;: -2.143440542151376, &#34;quarter&#34;: &#34;2023Q4&#34;}, {&#34;median_ppm2&#34;: 455531.45336225594, &#34;n&#34;: 11, &#34;qoq_pct&#34;: -10.820957784081441, &#34;quarter&#34;: &#34;2024Q1&#34;}, {&#34;median_ppm2&#34;: 554699.5377503851, &#34;n&#34;: 9, &#34;qoq_pct&#34;: 21.769755668060743, &#34;quarter&#34;: &#34;2024Q2&#34;}, {&#34;median_ppm2&#34;: 499520.30700351775, &#34;n&#34;: 8, &#34;qoq_pct&#34;: -9.947589098532482, &#34;quarter&#34;: &#34;2024Q3&#34;}, {&#34;median_ppm2&#34;: 550368.097130687, &#34;n&#34;: 4, &#34;qoq_pct&#34;: 10.179323926226512, &#34;quarter&#34;: &#34;2024Q4&#34;}, {&#34;median_ppm2&#34;: 474198.04741980473, &#34;n&#34;: 5, &#34;qoq_pct&#34;: -13.839837393916998, &#34;quarter&#34;: &#34;2025Q1&#34;}, {&#34;median_ppm2&#34;: 537109.375, &#34;n&#34;: 5, &#34;qoq_pct&#34;: 13.266888786764719, &#34;quarter&#34;: &#34;2025Q2&#34;}, {&#34;median_ppm2&#34;: 631262.5250501002, &#34;n&#34;: 7, &#34;qoq_pct&#34;: 17.529604663873187, &#34;quarter&#34;: &#34;2025Q3&#34;}, {&#34;median_ppm2&#34;: 545851.5283842795, &#34;n&#34;: 13, &#34;qoq_pct&#34;: -13.530186455950643, &#34;quarter&#34;: &#34;2025Q4&#34;}, {&#34;median_ppm2&#34;: 538599.6409335727, &#34;n&#34;: 7, &#34;qoq_pct&#34;: -1.3285457809694812, &#34;quarter&#34;: &#34;2026Q1&#34;}, {&#34;median_ppm2&#34;: 523178.8079470199, &#34;n&#34;: 5, &#34;qoq_pct&#34;: -2.86313465783663, &#34;quarter&#34;: &#34;2026Q2&#34;}, {&#34;median_ppm2&#34;: 428849.9025341131, &#34;n&#34;: 1, &#34;qoq_pct&#34;: -18.029955338416357, &#34;quarter&#34;: &#34;2026Q3&#34;}]}'></canvas></div>
   
 </section>
 
-
-
 <section class="card">
-  <h2><span class="ru">Сделки</span><span class="en">Deals</span> <span class="ru">(последние 60)</span><span class="en">(latest 60)</span></h2>
+  <h2 class="sech"><svg class="ic"><use href="#i-deals"/></svg><span class="ru">Сделки</span><span class="en">Deals</span> <span class="muted ru">(последние 60)</span><span class="muted en">(latest 60)</span></h2>
   <div class="tablewrap"><table>
     <thead><tr><th><span class="ru">Дата</span><span class="en">Date</span></th><th class="r"><span class="ru">Площадь, м²</span><span class="en">Area, m²</span></th><th class="r"><span class="ru">Сумма, ₸</span><span class="en">Amount, ₸</span></th><th class="r"><span class="ru">₸/м²</span><span class="en">₸/m²</span></th><th><span class="ru">Тип</span><span class="en">Type</span></th><th><span class="ru">Договор</span><span class="en">Contract</span></th></tr></thead>
     <tbody>
@@ -371,9 +414,11 @@
 
 </main>
 <footer>
-  Source: <a href="https://ashyq.data.gov.kz" rel="noopener">ЕГКН via Smart Data Ukimet / ashyq.data.gov.kz</a>,
-  <a href="https://creativecommons.org/licenses/by/3.0/" rel="noopener">CC BY 3.0</a>
-  · Map © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> contributors
+  <div class="wrap">
+    Source: <a href="https://ashyq.data.gov.kz" rel="noopener">ЕГКН via Smart Data Ukimet / ashyq.data.gov.kz</a>,
+    <a href="https://creativecommons.org/licenses/by/3.0/" rel="noopener">CC BY 3.0</a>
+    · Map © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> contributors
+  </div>
  · <span class="ru">Статическая копия от 2026-11-07: поиск и карта работают в браузере.</span><span class="en">Static copy from 2026-11-07: search and map run in your browser.</span>
 </footer>
 <script src="/kz-zillow/static/app.js"></script>

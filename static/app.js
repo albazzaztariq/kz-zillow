@@ -114,30 +114,34 @@
       .filter((h) => h.s >= 80).sort((a, b) => b.s - a.s || b.r.n - a.r.n).slice(0, 10);
   }
 
+  // runs the search for the current text and fills the dropdown; returns the first link (address first, then street)
+  async function doSearch() {
+    const raw = input.value.trim();
+    if (raw.length < 2) { out.innerHTML = ""; return null; }
+    const p = parseQuery(raw);
+    streetIdx = streetIdx || (await data("search.json")).map((r) => ({ id: r[0], label: r[1], district: r[2], n: r[3], key: r[4], lab: fold(r[1]) }));
+    let addr = [];
+    if (p.house) { addrIdx = addrIdx || (await data("addresses.json")); addr = searchAddresses(addrIdx, p); }
+    const streets = searchStreets(streetIdx, raw);
+    let html = "";
+    if (addr.length) {
+      html += `<li class="grp">${L10N("Адреса", "Addresses")}</li>` + addr.map((a) =>
+        `<li><a href="${buildingUrl(a[0], ptype0)}">${esc(name(a[1]))} <span class="muted">${esc(dname(addrIdx.d[a[2]]))} · ${a[5]} ${L10N("сделок", "deals")}</span></a></li>`).join("");
+    }
+    if (streets.length) {
+      html += `<li class="grp">${L10N("Улицы", "Streets")}</li>` + streets.map((h) =>
+        `<li><a href="${streetUrl(h.r.id, ptype0)}">${esc(name(h.r.label))} <span class="muted">${esc(dname(h.r.district))} · ${h.r.n} ${L10N("сделок", "deals")}</span></a></li>`).join("");
+    }
+    out.innerHTML = `<ul class="hits">${html || `<li class="muted">${L10N("Ничего не найдено по", "Nothing found for")} «${esc(raw)}»</li>`}</ul>`;
+    return out.querySelector("a");
+  }
+
   if (input && out) {
     let timer = null;
-    input.addEventListener("input", () => {
-      clearTimeout(timer);
-      timer = setTimeout(async () => {
-        const raw = input.value.trim();
-        if (raw.length < 2) { out.innerHTML = ""; return; }
-        const p = parseQuery(raw);
-        streetIdx = streetIdx || (await data("search.json")).map((r) => ({ id: r[0], label: r[1], district: r[2], n: r[3], key: r[4], lab: fold(r[1]) }));
-        let addr = [];
-        if (p.house) { addrIdx = addrIdx || (await data("addresses.json")); addr = searchAddresses(addrIdx, p); }
-        const streets = searchStreets(streetIdx, raw);
-        let html = "";
-        if (addr.length) {
-          html += `<li class="grp">${L10N("Адреса", "Addresses")}</li>` + addr.map((a) =>
-            `<li><a href="${buildingUrl(a[0], ptype0)}">${esc(name(a[1]))} <span class="muted">${esc(dname(addrIdx.d[a[2]]))} · ${a[5]} ${L10N("сделок", "deals")}</span></a></li>`).join("");
-        }
-        if (streets.length) {
-          html += `<li class="grp">${L10N("Улицы", "Streets")}</li>` + streets.map((h) =>
-            `<li><a href="${streetUrl(h.r.id, ptype0)}">${esc(name(h.r.label))} <span class="muted">${esc(dname(h.r.district))} · ${h.r.n} ${L10N("сделок", "deals")}</span></a></li>`).join("");
-        }
-        out.innerHTML = `<ul class="hits">${html || `<li class="muted">${L10N("Ничего не найдено по", "Nothing found for")} «${esc(raw)}»</li>`}</ul>`;
-      }, 200);
-    });
+    input.addEventListener("input", () => { clearTimeout(timer); timer = setTimeout(doSearch, 200); });
+    input.addEventListener("keydown", async (e) => { if (e.key === "Enter") { e.preventDefault(); const a = await doSearch(); if (a) location.href = a.href; } });
+    const btn = document.getElementById("findbtn");
+    if (btn) btn.addEventListener("click", async () => { const a = await doSearch(); if (a) location.href = a.href; else input.focus(); });
     document.addEventListener("click", (e) => { if (!e.target.closest(".search")) out.innerHTML = ""; });
   }
 
@@ -156,15 +160,19 @@
     const rows = sales[t], ppm = rows.map((r) => r[3]), last = rows[0];
     document.title = name(rec.l) + " — " + L10N("Исследование рынка недвижимости Алматы", "Almaty Property Market Research");
     $("#b-title").innerHTML = `${esc(name(rec.l))} <span class="muted">· ${esc(dname(rec.d))} ${L10N("район", "district")}</span>`;
+    const home = KZ.static ? `${KZ.base}index.html` : "/";
+    $("#b-crumbs").innerHTML = `<a href="${home}">${L10N("Главная", "Home")}</a> › <a href="${home}">${L10N("Алматы", "Almaty")}</a> › ` +
+      (SLUG[rec.d] ? `<a href="${districtUrl(rec.d, t)}">${esc(dname(rec.d))}</a>` : esc(dname(rec.d))) + ` › ` +
+      (rec.s ? `<a href="${streetUrl(rec.s, t)}">${L10N("улица", "street")}</a> › ` : "") + esc(name(rec.l));
     $("#b-toggle").innerHTML = ["apartment", "house"].map((k) =>
-      `<a href="${buildingUrl(id, k)}" class="${k === t ? "on" : ""}">${k === "apartment" ? L10N("Квартиры", "Apartments") : L10N("Дома", "Houses")} (${sales[k].length})</a>`).join("") +
-      (rec.s ? `<a href="${streetUrl(rec.s, t)}">← ${L10N("вся улица", "whole street")}</a>` : "") +
-      (SLUG[rec.d] ? `<a href="${districtUrl(rec.d, t)}">← ${esc(dname(rec.d))}</a>` : "");
-    const stat = (k, v) => `<div><span class="k">${k}</span><span class="v">${v}</span></div>`;
-    $("#b-stats").innerHTML = stat(L10N("Продаж", "Sales"), rows.length) +
-      stat(L10N("Медиана, ₸/м²", "Median, ₸/m²"), fmt(median(ppm))) +
-      stat(L10N("Последняя продажа", "Latest sale"), last ? `${last[0]}` : "—") +
-      stat(L10N("Её сумма, ₸", "Its amount, ₸"), last ? fmt(last[2]) : "—");
+      `<a href="${buildingUrl(id, k)}" class="${k === t ? "on" : ""}"><svg class="ic"><use href="#i-${k === "apartment" ? "building" : "home"}"/></svg>${k === "apartment" ? L10N("Квартиры", "Apartments") : L10N("Дома", "Houses")} (${sales[k].length})</a>`).join("") +
+      (rec.s ? `<a class="back" href="${streetUrl(rec.s, t)}">← ${L10N("вся улица", "whole street")}</a>` : "") +
+      (SLUG[rec.d] ? `<a class="back" href="${districtUrl(rec.d, t)}">← ${esc(dname(rec.d))}</a>` : "");
+    const stat = (icon, k, v) => `<div class="tile"><svg class="ic"><use href="#i-${icon}"/></svg><span class="k">${k}</span><span class="v">${v}</span></div>`;
+    $("#b-stats").innerHTML = stat("deals", L10N("Продаж", "Sales"), rows.length) +
+      stat("tag", L10N("Медиана, ₸/м²", "Median, ₸/m²"), fmt(median(ppm))) +
+      stat("calendar", L10N("Последняя продажа", "Latest sale"), last ? `${last[0]}` : "—") +
+      stat("tag", L10N("Её сумма, ₸", "Its amount, ₸"), last ? fmt(last[2]) : "—");
     $("#b-note").innerHTML = (rec.la == null ? L10N("Положение на карте найти не удалось.", "The location on the map could not be found.")
         : rec.p !== "exact" ? L10N("Положение на карте приблизительное.", "The location on the map is approximate.") : "") +
       " " + L10N("Номера квартир не публикуются: показаны все продажи в этом доме.", "Flat numbers are not published: all sales in this building are shown.");
