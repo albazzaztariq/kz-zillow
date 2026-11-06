@@ -243,14 +243,14 @@
       scale = m.scale || scale;
       L.geoJSON(m.geojson, {
         style: (f) => ({ fillColor: "#bbb", fillOpacity: 0.1, color: "#666", weight: f.properties.district === el.dataset.district ? 3 : 1 }),
-        onEachFeature: (f, l) => l.bindTooltip(`${dname(f.properties.district)}: ${fmt(f.properties.median_ppm2)} ₸/${L10N("м²", "m²")} (${f.properties.n} ${L10N("сделок", "deals")})`, { sticky: true })
-          .on("click", () => (location.href = districtUrl(f.properties.district, m.type))),
+        // tooltip only: a click on empty map space must never navigate or reload anything
+        onEachFeature: (f, l) => l.bindTooltip(`${dname(f.properties.district)}: ${fmt(f.properties.median_ppm2)} ₸/${L10N("м²", "m²")} (${f.properties.n} ${L10N("сделок", "deals")})`, { sticky: true }),
       }).addTo(map);
     });
   }
 
   const layer = L.layerGroup().addTo(map);
-  let timer = null, fitted = false;
+  let timer = null, fitted = false, lastView = "";
 
   async function popupHtml(it) {
     const shard = await data(`deals/${it.id.slice(0, 2)}.json`), rec = shard[it.id], key = ptype === "house" ? "h" : "a";
@@ -264,6 +264,9 @@
   function draw() {
     buildings().then((j) => {
       const b = map.getBounds(), z = map.getZoom();
+      const view = [z, b.getSouth(), b.getWest(), b.getNorth(), b.getEast()].map((v) => v.toFixed(4)).join("|");
+      if (view === lastView) return;   // nothing moved: keep the existing marks (no flicker, no reload)
+      lastView = view;
       const rows = j.rows.filter((r) => r[ptype].n > 0 && r.lat >= b.getSouth() && r.lat <= b.getNorth() && r.lon >= b.getWest() && r.lon <= b.getEast()
         && (!streetId || r.street === streetId));
       layer.clearLayers();
