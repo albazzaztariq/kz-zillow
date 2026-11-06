@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>микрорайон Тастыбулак — Исследование рынка недвижимости Алматы</title>
+  <meta name="title-en" content="Microdistrict Tastybulak — Almaty Property Market Research">
+  <script>try { if (localStorage.getItem("kzLang") === "en") document.documentElement.lang = "en"; } catch (e) {}</script>
+  <link rel="icon" type="image/svg+xml" href="/kz-zillow/static/logo.svg">
+  <link rel="stylesheet" href="/kz-zillow/static/vendor/leaflet.css">
+  <link rel="stylesheet" href="/kz-zillow/static/style.css">
+  <script>window.KZ = {static: true, base: "/kz-zillow/", data: "/kz-zillow/data/"};</script>
+  <script src="/kz-zillow/static/vendor/chart.umd.min.js"></script>
+  <script src="/kz-zillow/static/vendor/leaflet.js"></script>
+</head>
+<body data-ptype="apartment">
+<header class="top">
+  <a class="brand" href="/kz-zillow/index.html"><img class="logo" src="/kz-zillow/static/logo.svg" alt=""><span class="bn"><b><span class="ru">Исследование рынка недвижимости</span><span class="en">Property Market Research</span></b><small><span class="ru">Алматы</span><span class="en">Almaty</span></small></span></a>
+  <div class="search">
+    <input type="search" name="q" placeholder="Улица или микрорайон…" maxlength="80"
+           autocomplete="off" aria-label="Search">
+    <div id="results"></div>
+  </div>
+  <button id="lang" class="lang" type="button" title="Русский / English" aria-label="Language"><span class="ru">EN</span><span class="en">RU</span></button>
+</header>
+<main>
+
+<div class="hero">
+<div class="eyebrow"><span class="ru">Улица · сделки и цены</span><span class="en">Street · sales and prices</span></div>
+<h1><span class="ru">микрорайон Тастыбулак</span><span class="en">Microdistrict Tastybulak</span> <span class="muted">· <span class="ru">Наурызбайский район</span><span class="en">Nauryzbay district</span></span></h1>
+<nav class="toggle">
+  
+  <a href="/kz-zillow/street/da27239bdd.html" class="on"><span class="ru">Квартиры</span><span class="en">Apartments</span></a>
+  
+  <a href="/kz-zillow/street/da27239bdd-house.html" class=""><span class="ru">Дома</span><span class="en">Houses</span></a>
+  
+  <a href="/kz-zillow/district/nauryzbay.html">← <span class="ru">Наурызбайский</span><span class="en">Nauryzbay</span></a>
+  <a href="/kz-zillow/index.html">← <span class="ru">весь город</span><span class="en">whole city</span></a>
+</nav>
+</div>
+
+<section class="stats">
+  <div><span class="k"><span class="ru">Медиана, ₸/м²</span><span class="en">Median, ₸/m²</span> (2024Q2)</span><span class="v">478 397</span></div>
+  <div><span class="k"><span class="ru">К прошлому кварталу</span><span class="en">vs previous quarter</span></span><span class="v down">-10.0%</span></div>
+  <div><span class="k"><span class="ru">Сделок в этом квартале</span><span class="en">Deals this quarter</span></span><span class="v">2</span></div>
+  <div><span class="k"><span class="ru">Всего сделок (в индексе)</span><span class="en">Total deals (in the index)</span></span><span class="v">93</span></div>
+</section>
+<p class="muted note">
+  <span class="ru">Здесь — улица или микрорайон целиком. Даты — даты регистрации, а не подписания договора; номера квартир не публикуются.</span>
+  <span class="en">This is the whole street or microdistrict. Dates are registration dates, not contract-signing dates; flat numbers are not published.</span>
+</p>
+
+<section class="card">
+  <h2><span class="ru">Медианная цена за м² по кварталам</span><span class="en">Median price per m² by quarter</span></h2>
+  
+  <div class="chartbox"><canvas id="chart" data-chart='{&#34;labels&#34;: [&#34;2010Q2&#34;, &#34;2011Q1&#34;, &#34;2011Q2&#34;, &#34;2012Q2&#34;, &#34;2012Q3&#34;, &#34;2012Q4&#34;, &#34;2015Q2&#34;, &#34;2017Q1&#34;, &#34;2017Q2&#34;, &#34;2017Q4&#34;, &#34;2018Q1&#34;, &#34;2018Q4&#34;, &#34;2019Q1&#34;, &#34;2019Q2&#34;, &#34;2019Q3&#34;, &#34;2019Q4&#34;, &#34;2020Q1&#34;, &#34;2020Q3&#34;, &#34;2020Q4&#34;, &#34;2021Q1&#34;, &#34;2021Q2&#34;, &#34;2021Q3&#34;, &#34;2021Q4&#34;, &#34;2022Q1&#34;, &#34;2022Q2&#34;, &#34;2022Q3&#34;, &#34;2022Q4&#34;, &#34;2023Q1&#34;, &#34;2023Q2&#34;, &#34;2023Q3&#34;, &#34;2023Q4&#34;, &#34;2024Q1&#34;, &#34;2024Q2&#34;], &#34;median&#34;: [47341, 157265, 104784, 86903, 110762, 124519, 223582, 113514, 108108, 136965, 141304, 202546, 167568, 167568, 178378, 167568, 262032, 237624, 223759, 372138, 266990, 358696, 387850, 234792, 283069, 549451, 466794, 358852, 320197, 348139, 330206, 531822, 478397], &#34;n&#34;: [1, 1, 3, 3, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 3, 5, 6, 2, 7, 5, 7, 4, 6, 3, 6, 3, 1, 6, 2, 2, 2], &#34;rows&#34;: [{&#34;median_ppm2&#34;: 47340.823970037454, &#34;n&#34;: 1, &#34;qoq_pct&#34;: null, &#34;quarter&#34;: &#34;2010Q2&#34;}, {&#34;median_ppm2&#34;: 157264.5739910314, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 232.19652892092864, &#34;quarter&#34;: &#34;2011Q1&#34;}, {&#34;median_ppm2&#34;: 104783.95061728395, &#34;n&#34;: 3, &#34;qoq_pct&#34;: -33.37091249599566, &#34;quarter&#34;: &#34;2011Q2&#34;}, {&#34;median_ppm2&#34;: 86903.3047735618, &#34;n&#34;: 3, &#34;qoq_pct&#34;: -17.064298242609645, &#34;quarter&#34;: &#34;2012Q2&#34;}, {&#34;median_ppm2&#34;: 110761.60143383066, &#34;n&#34;: 2, &#34;qoq_pct&#34;: 27.453842776675575, &#34;quarter&#34;: &#34;2012Q3&#34;}, {&#34;median_ppm2&#34;: 124519.23076923077, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 12.420937542708765, &#34;quarter&#34;: &#34;2012Q4&#34;}, {&#34;median_ppm2&#34;: 223581.89081225035, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 79.5561130847416, &#34;quarter&#34;: &#34;2015Q2&#34;}, {&#34;median_ppm2&#34;: 113513.51351351352, &#34;n&#34;: 1, &#34;qoq_pct&#34;: -49.229558305849174, &#34;quarter&#34;: &#34;2017Q1&#34;}, {&#34;median_ppm2&#34;: 108108.1081081081, &#34;n&#34;: 1, &#34;qoq_pct&#34;: -4.761904761904767, &#34;quarter&#34;: &#34;2017Q2&#34;}, {&#34;median_ppm2&#34;: 136965.1712605236, &#34;n&#34;: 2, &#34;qoq_pct&#34;: 26.692783415984334, &#34;quarter&#34;: &#34;2017Q4&#34;}, {&#34;median_ppm2&#34;: 141304.34782608697, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 3.1680875697295052, &#34;quarter&#34;: &#34;2018Q1&#34;}, {&#34;median_ppm2&#34;: 202546.06961630908, &#34;n&#34;: 2, &#34;qoq_pct&#34;: 43.340295420772556, &#34;quarter&#34;: &#34;2018Q4&#34;}, {&#34;median_ppm2&#34;: 167567.56756756757, &#34;n&#34;: 1, &#34;qoq_pct&#34;: -17.269405481430788, &#34;quarter&#34;: &#34;2019Q1&#34;}, {&#34;median_ppm2&#34;: 167567.56756756757, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 0.0, &#34;quarter&#34;: &#34;2019Q2&#34;}, {&#34;median_ppm2&#34;: 178378.37837837837, &#34;n&#34;: 1, &#34;qoq_pct&#34;: 6.451612903225801, &#34;quarter&#34;: &#34;2019Q3&#34;}, {&#34;median_ppm2&#34;: 167567.56756756757, &#34;n&#34;: 1, &#34;qoq_pct&#34;: -6.060606060606055, &#34;quarter&#34;: &#34;2019Q4&#34;}, {&#34;median_ppm2&#34;: 262032.08556149734, &#34;n&#34;: 3, &#34;qoq_pct&#34;: 56.373986544764534, &#34;quarter&#34;: &#34;2020Q1&#34;}, {&#34;median_ppm2&#34;: 237623.76237623763, &#34;n&#34;: 5, &#34;qoq_pct&#34;: -9.315013133966454, &#34;quarter&#34;: &#34;2020Q3&#34;}, {&#34;median_ppm2&#34;: 223758.9996210686, &#34;n&#34;: 6, &#34;qoq_pct&#34;: -5.834754326133639, &#34;quarter&#34;: &#34;2020Q4&#34;}, {&#34;median_ppm2&#34;: 372138.2385456709, &#34;n&#34;: 2, &#34;qoq_pct&#34;: 66.31207646435655, &#34;quarter&#34;: &#34;2021Q1&#34;}, {&#34;median_ppm2&#34;: 266990.2912621359, &#34;n&#34;: 7, &#34;qoq_pct&#34;: -28.255077385881332, &#34;quarter&#34;: &#34;2021Q2&#34;}, {&#34;median_ppm2&#34;: 358695.6521739131, &#34;n&#34;: 5, &#34;qoq_pct&#34;: 34.347826086956545, &#34;quarter&#34;: &#34;2021Q3&#34;}, {&#34;median_ppm2&#34;: 387850.4672897197, &#34;n&#34;: 7, &#34;qoq_pct&#34;: 8.128009062588504, &#34;quarter&#34;: &#34;2021Q4&#34;}, {&#34;median_ppm2&#34;: 234792.47078279732, &#34;n&#34;: 4, &#34;qoq_pct&#34;: -39.46314608732696, &#34;quarter&#34;: &#34;2022Q1&#34;}, {&#34;median_ppm2&#34;: 283069.0485748695, &#34;n&#34;: 6, &#34;qoq_pct&#34;: 20.56138241193095, &#34;quarter&#34;: &#34;2022Q2&#34;}, {&#34;median_ppm2&#34;: 549450.5494505495, &#34;n&#34;: 3, &#34;qoq_pct&#34;: 94.10477839834341, &#34;quarter&#34;: &#34;2022Q3&#34;}, {&#34;median_ppm2&#34;: 466794.07548972766, &#34;n&#34;: 6, &#34;qoq_pct&#34;: -15.04347826086958, &#34;quarter&#34;: &#34;2022Q4&#34;}, {&#34;median_ppm2&#34;: 358851.67464114836, &#34;n&#34;: 3, &#34;qoq_pct&#34;: -23.12420112344693, &#34;quarter&#34;: &#34;2023Q1&#34;}, {&#34;median_ppm2&#34;: 320197.04433497536, &#34;n&#34;: 1, &#34;qoq_pct&#34;: -10.771756978653546, &#34;quarter&#34;: &#34;2023Q2&#34;}, {&#34;median_ppm2&#34;: 348139.2557022809, &#34;n&#34;: 6, &#34;qoq_pct&#34;: 8.726567550096952, &#34;quarter&#34;: &#34;2023Q3&#34;}, {&#34;median_ppm2&#34;: 330205.74855252274, &#34;n&#34;: 2, &#34;qoq_pct&#34;: -5.151245329568466, &#34;quarter&#34;: &#34;2023Q4&#34;}, {&#34;median_ppm2&#34;: 531822.3443223443, &#34;n&#34;: 2, &#34;qoq_pct&#34;: 61.05786972323175, &#34;quarter&#34;: &#34;2024Q1&#34;}, {&#34;median_ppm2&#34;: 478397.212543554, &#34;n&#34;: 2, &#34;qoq_pct&#34;: -10.045672647858627, &#34;quarter&#34;: &#34;2024Q2&#34;}]}'></canvas></div>
+  
+</section>
+
+
+<section class="card">
+  <h2><span class="ru">Дома на карте</span><span class="en">Buildings on the map</span> (1)</h2>
+  <div id="map" class="small" data-type="apartment" data-street="da27239bdd"></div>
+  <p id="map-status" class="muted note"></p>
+</section>
+
+
+<section class="card">
+  <h2><span class="ru">Сделки</span><span class="en">Deals</span> <span class="ru">(последние 60)</span><span class="en">(latest 60)</span></h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th><span class="ru">Дата</span><span class="en">Date</span></th><th class="r"><span class="ru">Площадь, м²</span><span class="en">Area, m²</span></th><th class="r"><span class="ru">Сумма, ₸</span><span class="en">Amount, ₸</span></th><th class="r"><span class="ru">₸/м²</span><span class="en">₸/m²</span></th><th><span class="ru">Тип</span><span class="en">Type</span></th><th><span class="ru">Договор</span><span class="en">Contract</span></th></tr></thead>
+    <tbody>
+    
+      <tr><td>2024-05-02 11:41:12</td><td class="r">21.0</td>
+          <td class="r">7 800 000</td><td class="r">371 429</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2024-04-08 09:14:29</td><td class="r">20.5</td>
+          <td class="r">12 000 000</td><td class="r">585 366</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2024-02-06 14:07:15</td><td class="r">21.0</td>
+          <td class="r">13 250 000</td><td class="r">630 952</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2024-01-17 16:06:47</td><td class="r">20.8</td>
+          <td class="r">9 000 000</td><td class="r">432 692</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2023-12-29 14:44:46</td><td class="r">18.6</td>
+          <td class="r">2 000 000</td><td class="r">107 527</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2023-10-13 15:17:21</td><td class="r">20.8</td>
+          <td class="r">11 500 000</td><td class="r">552 885</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2023-09-04 16:11:37</td><td class="r">166.6</td>
+          <td class="r">58 000 000</td><td class="r">348 139</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2023-09-04 16:11:37</td><td class="r">166.6</td>
+          <td class="r">58 000 000</td><td class="r">348 139</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2023-09-04 16:11:37</td><td class="r">166.6</td>
+          <td class="r">58 000 000</td><td class="r">348 139</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2023-09-04 16:11:37</td><td class="r">166.6</td>
+          <td class="r">58 000 000</td><td class="r">348 139</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2023-08-29 10:35:41</td><td class="r">18.5</td>
+          <td class="r">10 300 000</td><td class="r">556 757</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2023-08-22 17:41:46</td><td class="r">18.5</td>
+          <td class="r">7 800 000</td><td class="r">421 622</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2023-05-17 16:05:52</td><td class="r">20.3</td>
+          <td class="r">6 500 000</td><td class="r">320 197</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2023-03-17 18:09:34</td><td class="r">18.5</td>
+          <td class="r">5 500 000</td><td class="r">297 297</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2023-01-19 10:44:30</td><td class="r">41.8</td>
+          <td class="r">15 000 000</td><td class="r">358 852</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2023-01-18 10:51:48</td><td class="r">20.5</td>
+          <td class="r">10 000 000</td><td class="r">487 805</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-12-13 10:49:53</td><td class="r">18.5</td>
+          <td class="r">6 500 000</td><td class="r">351 351</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-12-09 10:31:19</td><td class="r">83.4</td>
+          <td class="r">38 000 000</td><td class="r">455 635</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-12-09 10:31:19</td><td class="r">80.5</td>
+          <td class="r">38 000 000</td><td class="r">472 050</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-11-15 12:18:16</td><td class="r">21.0</td>
+          <td class="r">10 000 000</td><td class="r">476 190</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-11-10 15:34:46</td><td class="r">18.8</td>
+          <td class="r">10 950 000</td><td class="r">582 447</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-10-03 16:21:49</td><td class="r">18.2</td>
+          <td class="r">8 400 000</td><td class="r">461 538</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-09-01 16:30:12</td><td class="r">167.4</td>
+          <td class="r">47 000 000</td><td class="r">280 765</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-08-11 18:16:22</td><td class="r">21.0</td>
+          <td class="r">12 500 000</td><td class="r">595 238</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-07-18 10:11:07</td><td class="r">18.2</td>
+          <td class="r">10 000 000</td><td class="r">549 451</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-06-01 12:10:22</td><td class="r">145.8</td>
+          <td class="r">44 000 000</td><td class="r">301 783</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-06-01 12:10:22</td><td class="r">141.9</td>
+          <td class="r">44 000 000</td><td class="r">310 078</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-06-01 12:10:22</td><td class="r">150.4</td>
+          <td class="r">44 000 000</td><td class="r">292 553</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-04-29 10:34:59</td><td class="r">45.7</td>
+          <td class="r">11 600 000</td><td class="r">253 829</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-04-29 10:34:59</td><td class="r">46.9</td>
+          <td class="r">11 600 000</td><td class="r">247 335</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-04-25 14:55:43</td><td class="r">21.2</td>
+          <td class="r">5 800 000</td><td class="r">273 585</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-03-04 12:42:13</td><td class="r">195.1</td>
+          <td class="r">48 500 000</td><td class="r">248 590</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-02-01 16:05:31</td><td class="r">18.4</td>
+          <td class="r">9 000 000</td><td class="r">489 130</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-01-27 15:08:48</td><td class="r">152.6</td>
+          <td class="r">32 000 000</td><td class="r">209 699</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2022-01-27 15:08:48</td><td class="r">144.8</td>
+          <td class="r">32 000 000</td><td class="r">220 994</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-12-31 09:53:48</td><td class="r">18.4</td>
+          <td class="r">8 780 000</td><td class="r">477 174</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-12-22 16:33:56</td><td class="r">20.8</td>
+          <td class="r">9 350 000</td><td class="r">449 519</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-12-20 19:04:53</td><td class="r">18.5</td>
+          <td class="r">8 200 000</td><td class="r">443 243</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-12-14 12:04:05</td><td class="r">18.4</td>
+          <td class="r">2 000 000</td><td class="r">108 696</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-11-30 09:51:27</td><td class="r">120.3</td>
+          <td class="r">36 000 000</td><td class="r">299 252</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-11-17 19:08:26</td><td class="r">21.4</td>
+          <td class="r">8 300 000</td><td class="r">387 850</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-11-01 18:09:16</td><td class="r">18.4</td>
+          <td class="r">6 500 000</td><td class="r">353 261</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-09-29 12:19:16</td><td class="r">20.2</td>
+          <td class="r">8 500 000</td><td class="r">420 792</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-09-08 10:40:16</td><td class="r">18.4</td>
+          <td class="r">6 600 000</td><td class="r">358 696</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-09-08 10:40:16</td><td class="r">18.4</td>
+          <td class="r">6 600 000</td><td class="r">358 696</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-08-20 15:56:20</td><td class="r">18.5</td>
+          <td class="r">5 600 000</td><td class="r">302 703</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-07-15 18:44:40</td><td class="r">19.3</td>
+          <td class="r">5 500 000</td><td class="r">284 974</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-06-28 10:16:23</td><td class="r">18.9</td>
+          <td class="r">5 135 000</td><td class="r">271 693</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-06-23 19:02:28</td><td class="r">18.4</td>
+          <td class="r">5 500 000</td><td class="r">298 913</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-06-21 19:50:38</td><td class="r">20.5</td>
+          <td class="r">5 600 000</td><td class="r">273 171</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-06-16 13:59:45</td><td class="r">20.6</td>
+          <td class="r">5 500 000</td><td class="r">266 990</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-04-29 17:56:25</td><td class="r">166.6</td>
+          <td class="r">32 300 000</td><td class="r">193 878</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-04-29 17:56:25</td><td class="r">166.6</td>
+          <td class="r">32 300 000</td><td class="r">193 878</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-04-16 13:36:32</td><td class="r">19.3</td>
+          <td class="r">4 750 000</td><td class="r">246 114</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-03-10 11:02:35</td><td class="r">85.7</td>
+          <td class="r">30 000 000</td><td class="r">350 058</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2021-03-10 11:02:35</td><td class="r">76.1</td>
+          <td class="r">30 000 000</td><td class="r">394 218</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2020-11-25 15:02:11</td><td class="r">20.8</td>
+          <td class="r">4 800 000</td><td class="r">230 769</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2020-11-23 11:38:46</td><td class="r">21.0</td>
+          <td class="r">5 000 000</td><td class="r">238 095</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2020-10-27 17:15:37</td><td class="r">18.5</td>
+          <td class="r">3 300 000</td><td class="r">178 378</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+      <tr><td>2020-10-14 11:11:27</td><td class="r">18.5</td>
+          <td class="r">4 800 000</td><td class="r">259 459</td>
+          <td><span class="ru">Квартира</span><span class="en">Apartment</span></td>
+          <td><span class="ru">Купля-продажа</span><span class="en">Sale</span></td></tr>
+    
+    </tbody>
+  </table></div>
+</section>
+
+</main>
+<footer>
+  Source: <a href="https://ashyq.data.gov.kz" rel="noopener">ЕГКН via Smart Data Ukimet / ashyq.data.gov.kz</a>,
+  <a href="https://creativecommons.org/licenses/by/3.0/" rel="noopener">CC BY 3.0</a>
+  · Map © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> contributors
+ · <span class="ru">Статическая копия от 2026-11-07: поиск и карта работают в браузере.</span><span class="en">Static copy from 2026-11-07: search and map run in your browser.</span>
+</footer>
+<script src="/kz-zillow/static/app.js"></script>
+</body>
+</html>

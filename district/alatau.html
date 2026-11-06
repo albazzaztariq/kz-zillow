@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Алатауский район — Исследование рынка недвижимости Алматы</title>
+  <meta name="title-en" content="Alatau district — Almaty Property Market Research">
+  <script>try { if (localStorage.getItem("kzLang") === "en") document.documentElement.lang = "en"; } catch (e) {}</script>
+  <link rel="icon" type="image/svg+xml" href="/kz-zillow/static/logo.svg">
+  <link rel="stylesheet" href="/kz-zillow/static/vendor/leaflet.css">
+  <link rel="stylesheet" href="/kz-zillow/static/style.css">
+  <script>window.KZ = {static: true, base: "/kz-zillow/", data: "/kz-zillow/data/"};</script>
+  <script src="/kz-zillow/static/vendor/chart.umd.min.js"></script>
+  <script src="/kz-zillow/static/vendor/leaflet.js"></script>
+</head>
+<body data-ptype="apartment">
+<header class="top">
+  <a class="brand" href="/kz-zillow/index.html"><img class="logo" src="/kz-zillow/static/logo.svg" alt=""><span class="bn"><b><span class="ru">Исследование рынка недвижимости</span><span class="en">Property Market Research</span></b><small><span class="ru">Алматы</span><span class="en">Almaty</span></small></span></a>
+  <div class="search">
+    <input type="search" name="q" placeholder="Улица или микрорайон…" maxlength="80"
+           autocomplete="off" aria-label="Search">
+    <div id="results"></div>
+  </div>
+  <button id="lang" class="lang" type="button" title="Русский / English" aria-label="Language"><span class="ru">EN</span><span class="en">RU</span></button>
+</header>
+<main>
+
+<div class="hero">
+<div class="eyebrow"><span class="ru">Цены реальных сделок · данные ЕГКН</span><span class="en">Real sale prices · registry data</span></div>
+<h1><span class="ru">Алатауский район</span><span class="en">Alatau district</span></h1>
+
+<nav class="toggle">
+  
+  <a href="/kz-zillow/district/alatau.html" class="on"><span class="ru">Квартиры</span><span class="en">Apartments</span></a>
+  
+  <a href="/kz-zillow/district/alatau-house.html" class=""><span class="ru">Дома</span><span class="en">Houses</span></a>
+  
+  <a href="/kz-zillow/index.html">← <span class="ru">весь город</span><span class="en">whole city</span></a>
+</nav>
+</div>
+
+<section class="stats">
+  <div><span class="k"><span class="ru">Медиана, ₸/м²</span><span class="en">Median, ₸/m²</span> (2026Q2)</span><span class="v">505 568</span></div>
+  <div><span class="k"><span class="ru">К прошлому кварталу</span><span class="en">vs previous quarter</span></span><span class="v up">+4.0%</span></div>
+  <div><span class="k"><span class="ru">Сделок в этом квартале</span><span class="en">Deals this quarter</span></span><span class="v">2 369</span></div>
+  <div><span class="k"><span class="ru">Всего сделок (в индексе)</span><span class="en">Total deals (in the index)</span></span><span class="v">49 810</span></div>
+</section>
+<p class="muted note">
+  <span class="ru">Последний полный квартал: 2026Q2. Квартал 2026Q3 опубликован не полностью и показан на графике, но не в сводке.
+  Только рыночные продажи (купля-продажа); выбросы цены (ниже 1-го и выше 99-го процентиля за квартал) исключены.</span>
+  <span class="en">Latest full quarter: 2026Q2. Quarter 2026Q3 is only partly published and appears on the chart but not in the summary.
+  Market sales only (purchase/sale contracts); price outliers (below the 1st and above the 99th percentile for the quarter) are excluded.</span>
+</p>
+
+<section class="card">
+  <h2><span class="ru">Медианная цена за м² по кварталам</span><span class="en">Median price per m² by quarter</span></h2>
+  <div class="chartbox"><canvas id="chart" data-chart='{&#34;labels&#34;: [&#34;2001Q2&#34;, &#34;2002Q3&#34;, &#34;2002Q4&#34;, &#34;2003Q3&#34;, &#34;2004Q1&#34;, &#34;2006Q3&#34;, &#34;2006Q4&#34;, &#34;2009Q3&#34;, &#34;2009Q4&#34;, &#34;2010Q2&#34;, &#34;2010Q3&#34;, &#34;2010Q4&#34;, &#34;2011Q1&#34;, &#34;2011Q2&#34;, &#34;2011Q3&#34;, &#34;2011Q4&#34;, &#34;2012Q1&#34;, &#34;2012Q2&#34;, &#34;2012Q3&#34;, &#34;2012Q4&#34;, &#34;2013Q1&#34;, &#34;2013Q2&#34;, &#34;2013Q3&#34;, &#34;2013Q4&#34;, &#34;2014Q1&#34;, &#34;2014Q2&#34;, &#34;2014Q3&#34;, &#34;2014Q4&#34;, &#34;2015Q1&#34;, &#34;2015Q2&#34;, &#34;2015Q3&#34;, &#34;2015Q4&#34;, &#34;2016Q1&#34;, &#34;2016Q2&#34;, &#34;2016Q3&#34;, &#34;2016Q4&#34;, &#34;2017Q1&#34;, &#34;2017Q2&#34;, &#34;2017Q3&#34;, &#34;2017Q4&#34;, &#34;2018Q1&#34;, &#34;2018Q2&#34;, &#34;2018Q3&#34;, &#34;2018Q4&#34;, &#34;2019Q1&#34;, &#34;2019Q2&#34;, &#34;2019Q3&#34;, &#34;2019Q4&#34;, &#34;2020Q1&#34;, &#34;2020Q2&#34;, &#34;2020Q3&#34;, &#34;2020Q4&#34;, &#34;2021Q1&#34;, &#34;2021Q2&#34;, &#34;2021Q3&#34;, &#34;2021Q4&#34;, &#34;2022Q1&#34;, &#34;2022Q2&#34;, &#34;2022Q3&#34;, &#34;2022Q4&#34;, &#34;2023Q1&#34;, &#34;2023Q2&#34;, &#34;2023Q3&#34;, &#34;2023Q4&#34;, &#34;2024Q1&#34;, &#34;2024Q2&#34;, &#34;2024Q3&#34;, &#34;2024Q4&#34;, &#34;2025Q1&#34;, &#34;2025Q2&#34;, &#34;2025Q3&#34;, &#34;2025Q4&#34;, &#34;2026Q1&#34;, &#34;2026Q2&#34;, &#34;2026Q3&#34;], &#34;median&#34;: [12388, 20429, 19412, 22657, 26880, 117340, 179236, 174312, 157473, 149691, 147350, 131938, 71775, 71775, 71774, 71774, 71774, 102000, 102000, 112500, 102000, 102000, 178498, 180000, 102000, 102000, 125000, 125000, 125000, 142500, 208307, 215250, 221000, 228358, 217300, 221327, 120000, 142500, 229885, 159800, 213270, 209162, 208271, 210000, 205441, 257290, 179001, 257143, 271964, 280000, 269231, 295122, 330000, 335000, 350978, 370923, 375000, 400000, 389496, 350140, 380000, 440000, 403526, 420000, 453440, 445028, 443000, 454608, 463087, 472885, 498221, 501295, 486228, 505568, 570986], &#34;n&#34;: [5, 7, 11, 9, 5, 9, 10, 9, 5, 5, 7, 19, 61, 48, 104, 149, 138, 135, 121, 57, 47, 65, 59, 158, 66, 52, 136, 214, 98, 266, 105, 114, 110, 88, 109, 94, 317, 171, 169, 311, 221, 261, 1519, 821, 728, 733, 1053, 493, 306, 257, 997, 758, 572, 1042, 1078, 1274, 1156, 915, 1347, 1598, 764, 759, 1762, 1299, 2010, 1287, 2537, 2728, 1432, 2565, 2543, 3086, 2377, 2369, 1444], &#34;rows&#34;: [{&#34;median_ppm2&#34;: 12387.640449438202, &#34;n&#34;: 5, &#34;qoq_pct&#34;: 101.12359550561796, &#34;quarter&#34;: &#34;2001Q2&#34;}, {&#34;median_ppm2&#34;: 20428.977272727272, &#34;n&#34;: 7, &#34;qoq_pct&#34;: 0.5591459846476798, &#34;quarter&#34;: &#34;2002Q3&#34;}, {&#34;median_ppm2&#34;: 19411.764705882353, &#34;n&#34;: 11, &#34;qoq_pct&#34;: -4.979263294804781, &#34;quarter&#34;: &#34;2002Q4&#34;}, {&#34;median_ppm2&#34;: 22657.186254034554, &#34;n&#34;: 9, &#34;qoq_pct&#34;: -42.053466821760146, &#34;quarter&#34;: &#34;2003Q3&#34;}, {&#34;median_ppm2&#34;: 26879.806835066865, &#34;n&#34;: 5, &#34;qoq_pct&#34;: -48.03705285945231, &#34;quarter&#34;: &#34;2004Q1&#34;}, {&#34;median_ppm2&#34;: 117340.28683181225, &#34;n&#34;: 9, &#34;qoq_pct&#34;: 9.60707620727559, &#34;quarter&#34;: &#34;2006Q3&#34;}, {&#34;median_ppm2&#34;: 179236.07378375012, &#34;n&#34;: 10, &#34;qoq_pct&#34;: 52.748965102373724, &#34;quarter&#34;: &#34;2006Q4&#34;}, {&#34;median_ppm2&#34;: 174311.92660550456, &#34;n&#34;: 9, &#34;qoq_pct&#34;: 16.30759347211159, &#34;quarter&#34;: &#34;2009Q3&#34;}, {&#34;median_ppm2&#34;: 157473.3096085409, &#34;n&#34;: 5, &#34;qoq_pct&#34;: -9.660048698258095, &#34;quarter&#34;: &#34;2009Q4&#34;}, {&#34;median_ppm2&#34;: 149691.01123595505, &#34;n&#34;: 5, &#34;qoq_pct&#34;: -6.085038664564291, &#34;quarter&#34;: &#34;2010Q2&#34;}, {&#34;median_ppm2&#34;: 147349.92679355785, &#34;n&#34;: 7, &#34;qoq_pct&#34;: -1.5639445702634758, &#34;quarter&#34;: &#34;2010Q3&#34;}, {&#34;median_ppm2&#34;: 131937.98449612403, &#34;n&#34;: 19, &#34;qoq_pct&#34;: -10.459416324669412, &#34;quarter&#34;: &#34;2010Q4&#34;}, {&#34;median_ppm2&#34;: 71774.94117647059, &#34;n&#34;: 61, &#34;qoq_pct&#34;: -45.59948641736366, &#34;quarter&#34;: &#34;2011Q1&#34;}, {&#34;median_ppm2&#34;: 71774.93543758967, &#34;n&#34;: 48, &#34;qoq_pct&#34;: -7.995660922244241e-06, &#34;quarter&#34;: &#34;2011Q2&#34;}, {&#34;median_ppm2&#34;: 71774.00452488687, &#34;n&#34;: 104, &#34;qoq_pct&#34;: -0.0012969885617053478, &#34;quarter&#34;: &#34;2011Q3&#34;}, {&#34;median_ppm2&#34;: 71774.00247831474, &#34;n&#34;: 149, &#34;qoq_pct&#34;: -2.851411373683277e-06, &#34;quarter&#34;: &#34;2011Q4&#34;}, {&#34;median_ppm2&#34;: 71774.00862970832, &#34;n&#34;: 138, &#34;qoq_pct&#34;: 8.570503751137437e-06, &#34;quarter&#34;: &#34;2012Q1&#34;}, {&#34;median_ppm2&#34;: 101999.99999999999, &#34;n&#34;: 135, &#34;qoq_pct&#34;: 42.11272568908835, &#34;quarter&#34;: &#34;2012Q2&#34;}, {&#34;median_ppm2&#34;: 102000.0, &#34;n&#34;: 121, &#34;qoq_pct&#34;: 2.220446049250313e-14, &#34;quarter&#34;: &#34;2012Q3&#34;}, {&#34;median_ppm2&#34;: 112500.0, &#34;n&#34;: 57, &#34;qoq_pct&#34;: 10.294117647058831, &#34;quarter&#34;: &#34;2012Q4&#34;}, {&#34;median_ppm2&#34;: 102000.00000000001, &#34;n&#34;: 47, &#34;qoq_pct&#34;: -9.333333333333316, &#34;quarter&#34;: &#34;2013Q1&#34;}, {&#34;median_ppm2&#34;: 102000.00000000001, &#34;n&#34;: 65, &#34;qoq_pct&#34;: 0.0, &#34;quarter&#34;: &#34;2013Q2&#34;}, {&#34;median_ppm2&#34;: 178498.40255591055, &#34;n&#34;: 59, &#34;qoq_pct&#34;: 74.99843387834366, &#34;quarter&#34;: &#34;2013Q3&#34;}, {&#34;median_ppm2&#34;: 179999.99999999997, &#34;n&#34;: 158, &#34;qoq_pct&#34;: 0.8412385895829377, &#34;quarter&#34;: &#34;2013Q4&#34;}, {&#34;median_ppm2&#34;: 102000.00000000001, &#34;n&#34;: 66, &#34;qoq_pct&#34;: -43.333333333333314, &#34;quarter&#34;: &#34;2014Q1&#34;}, {&#34;median_ppm2&#34;: 102000.00000000001, &#34;n&#34;: 52, &#34;qoq_pct&#34;: 0.0, &#34;quarter&#34;: &#34;2014Q2&#34;}, {&#34;median_ppm2&#34;: 124999.99999999999, &#34;n&#34;: 136, &#34;qoq_pct&#34;: 22.5490196078431, &#34;quarter&#34;: &#34;2014Q3&#34;}, {&#34;median_ppm2&#34;: 125000.0, &#34;n&#34;: 214, &#34;qoq_pct&#34;: 2.220446049250313e-14, &#34;quarter&#34;: &#34;2014Q4&#34;}, {&#34;median_ppm2&#34;: 125000.00000000001, &#34;n&#34;: 98, &#34;qoq_pct&#34;: 2.220446049250313e-14, &#34;quarter&#34;: &#34;2015Q1&#34;}, {&#34;median_ppm2&#34;: 142500.0, &#34;n&#34;: 266, &#34;qoq_pct&#34;: 13.99999999999999, &#34;quarter&#34;: &#34;2015Q2&#34;}, {&#34;median_ppm2&#34;: 208306.66666666666, &#34;n&#34;: 105, &#34;qoq_pct&#34;: 46.18011695906432, &#34;quarter&#34;: &#34;2015Q3&#34;}, {&#34;median_ppm2&#34;: 215250.0, &#34;n&#34;: 114, &#34;qoq_pct&#34;: 3.3332266530115895, &#34;quarter&#34;: &#34;2015Q4&#34;}, {&#34;median_ppm2&#34;: 221000.0, &#34;n&#34;: 110, &#34;qoq_pct&#34;: 2.6713124274099886, &#34;quarter&#34;: &#34;2016Q1&#34;}, {&#34;median_ppm2&#34;: 228357.57959097618, &#34;n&#34;: 88, &#34;qoq_pct&#34;: 3.329221534378357, &#34;quarter&#34;: &#34;2016Q2&#34;}, {&#34;median_ppm2&#34;: 217299.99999999997, &#34;n&#34;: 109, &#34;qoq_pct&#34;: -4.842221401532654, &#34;quarter&#34;: &#34;2016Q3&#34;}, {&#34;median_ppm2&#34;: 221327.2654433175, &#34;n&#34;: 94, &#34;qoq_pct&#34;: 1.85332049853546, &#34;quarter&#34;: &#34;2016Q4&#34;}, {&#34;median_ppm2&#34;: 120000.00000000001, &#34;n&#34;: 317, &#34;qoq_pct&#34;: -45.78164612496316, &#34;quarter&#34;: &#34;2017Q1&#34;}, {&#34;median_ppm2&#34;: 142500.0, &#34;n&#34;: 171, &#34;qoq_pct&#34;: 18.74999999999998, &#34;quarter&#34;: &#34;2017Q2&#34;}, {&#34;median_ppm2&#34;: 229885.0574712644, &#34;n&#34;: 169, &#34;qoq_pct&#34;: 61.322847348255706, &#34;quarter&#34;: &#34;2017Q3&#34;}, {&#34;median_ppm2&#34;: 159800.00000000006, &#34;n&#34;: 311, &#34;qoq_pct&#34;: -30.486999999999973, &#34;quarter&#34;: &#34;2017Q4&#34;}, {&#34;median_ppm2&#34;: 213270.14218009476, &#34;n&#34;: 221, &#34;qoq_pct&#34;: 33.46066469342597, &#34;quarter&#34;: &#34;2018Q1&#34;}, {&#34;median_ppm2&#34;: 209161.53846153847, &#34;n&#34;: 261, &#34;qoq_pct&#34;: -1.926478632478612, &#34;quarter&#34;: &#34;2018Q2&#34;}, {&#34;median_ppm2&#34;: 208270.67669172937, &#34;n&#34;: 1519, &#34;qoq_pct&#34;: -0.42592045189652206, &#34;quarter&#34;: &#34;2018Q3&#34;}, {&#34;median_ppm2&#34;: 210000.0, &#34;n&#34;: 821, &#34;qoq_pct&#34;: 0.8303249097472598, &#34;quarter&#34;: &#34;2018Q4&#34;}, {&#34;median_ppm2&#34;: 205441.17647058822, &#34;n&#34;: 728, &#34;qoq_pct&#34;: -2.170868347338939, &#34;quarter&#34;: &#34;2019Q1&#34;}, {&#34;median_ppm2&#34;: 257289.87993138938, &#34;n&#34;: 733, &#34;qoq_pct&#34;: 25.237736831313384, &#34;quarter&#34;: &#34;2019Q2&#34;}, {&#34;median_ppm2&#34;: 179000.90000000002, &#34;n&#34;: 1053, &#34;qoq_pct&#34;: -30.42831686666666, &#34;quarter&#34;: &#34;2019Q3&#34;}, {&#34;median_ppm2&#34;: 257142.8571428572, &#34;n&#34;: 493, &#34;qoq_pct&#34;: 43.654505168888626, &#34;quarter&#34;: &#34;2019Q4&#34;}, {&#34;median_ppm2&#34;: 271964.2857142857, &#34;n&#34;: 306, &#34;qoq_pct&#34;: 5.763888888888857, &#34;quarter&#34;: &#34;2020Q1&#34;}, {&#34;median_ppm2&#34;: 280000.0, &#34;n&#34;: 257, &#34;qoq_pct&#34;: 2.9546946815495856, &#34;quarter&#34;: &#34;2020Q2&#34;}, {&#34;median_ppm2&#34;: 269230.76923076925, &#34;n&#34;: 997, &#34;qoq_pct&#34;: -3.8461538461538436, &#34;quarter&#34;: &#34;2020Q3&#34;}, {&#34;median_ppm2&#34;: 295121.7533545744, &#34;n&#34;: 758, &#34;qoq_pct&#34;: 9.616651245984764, &#34;quarter&#34;: &#34;2020Q4&#34;}, {&#34;median_ppm2&#34;: 330000.0, &#34;n&#34;: 572, &#34;qoq_pct&#34;: 11.818256786893343, &#34;quarter&#34;: &#34;2021Q1&#34;}, {&#34;median_ppm2&#34;: 335000.0, &#34;n&#34;: 1042, &#34;qoq_pct&#34;: 1.5151515151515138, &#34;quarter&#34;: &#34;2021Q2&#34;}, {&#34;median_ppm2&#34;: 350978.3520257785, &#34;n&#34;: 1078, &#34;qoq_pct&#34;: 4.769657321127907, &#34;quarter&#34;: &#34;2021Q3&#34;}, {&#34;median_ppm2&#34;: 370922.88260552083, &#34;n&#34;: 1274, &#34;qoq_pct&#34;: 5.682552916619055, &#34;quarter&#34;: &#34;2021Q4&#34;}, {&#34;median_ppm2&#34;: 375000.0, &#34;n&#34;: 1156, &#34;qoq_pct&#34;: 1.09918195551586, &#34;quarter&#34;: &#34;2022Q1&#34;}, {&#34;median_ppm2&#34;: 400000.0, &#34;n&#34;: 915, &#34;qoq_pct&#34;: 6.666666666666665, &#34;quarter&#34;: &#34;2022Q2&#34;}, {&#34;median_ppm2&#34;: 389496.198156682, &#34;n&#34;: 1347, &#34;qoq_pct&#34;: -2.625950460829496, &#34;quarter&#34;: &#34;2022Q3&#34;}, {&#34;median_ppm2&#34;: 350140.05602240894, &#34;n&#34;: 1598, &#34;qoq_pct&#34;: -10.104371318777638, &#34;quarter&#34;: &#34;2022Q4&#34;}, {&#34;median_ppm2&#34;: 380000.0, &#34;n&#34;: 764, &#34;qoq_pct&#34;: 8.528000000000002, &#34;quarter&#34;: &#34;2023Q1&#34;}, {&#34;median_ppm2&#34;: 440000.0, &#34;n&#34;: 759, &#34;qoq_pct&#34;: 15.789473684210531, &#34;quarter&#34;: &#34;2023Q2&#34;}, {&#34;median_ppm2&#34;: 403526.3895971443, &#34;n&#34;: 1762, &#34;qoq_pct&#34;: -8.289456909739922, &#34;quarter&#34;: &#34;2023Q3&#34;}, {&#34;median_ppm2&#34;: 420000.0, &#34;n&#34;: 1299, &#34;qoq_pct&#34;: 4.082412161272009, &#34;quarter&#34;: &#34;2023Q4&#34;}, {&#34;median_ppm2&#34;: 453439.8242055443, &#34;n&#34;: 2010, &#34;qoq_pct&#34;: 7.9618629060819845, &#34;quarter&#34;: &#34;2024Q1&#34;}, {&#34;median_ppm2&#34;: 445028.36468885676, &#34;n&#34;: 1287, &#34;qoq_pct&#34;: -1.855033251970084, &#34;quarter&#34;: &#34;2024Q2&#34;}, {&#34;median_ppm2&#34;: 443000.0, &#34;n&#34;: 2537, &#34;qoq_pct&#34;: -0.4557832376088866, &#34;quarter&#34;: &#34;2024Q3&#34;}, {&#34;median_ppm2&#34;: 454607.8596443966, &#34;n&#34;: 2728, &#34;qoq_pct&#34;: 2.6202843441075707, &#34;quarter&#34;: &#34;2024Q4&#34;}, {&#34;median_ppm2&#34;: 463087.24832214764, &#34;n&#34;: 1432, &#34;qoq_pct&#34;: 1.8652094322310742, &#34;quarter&#34;: &#34;2025Q1&#34;}, {&#34;median_ppm2&#34;: 472885.03253796103, &#34;n&#34;: 2565, &#34;qoq_pct&#34;: 2.1157534031249092, &#34;quarter&#34;: &#34;2025Q2&#34;}, {&#34;median_ppm2&#34;: 498220.640569395, &#34;n&#34;: 2543, &#34;qoq_pct&#34;: 5.35766756995002, &#34;quarter&#34;: &#34;2025Q3&#34;}, {&#34;median_ppm2&#34;: 501294.50305214967, &#34;n&#34;: 3086, &#34;qoq_pct&#34;: 0.6169681126100501, &#34;quarter&#34;: &#34;2025Q4&#34;}, {&#34;median_ppm2&#34;: 486227.84810126584, &#34;n&#34;: 2377, &#34;qoq_pct&#34;: -3.0055496039054774, &#34;quarter&#34;: &#34;2026Q1&#34;}, {&#34;median_ppm2&#34;: 505567.92873051227, &#34;n&#34;: 2369, &#34;qoq_pct&#34;: 3.9775756787214123, &#34;quarter&#34;: &#34;2026Q2&#34;}, {&#34;median_ppm2&#34;: 570985.5983772819, &#34;n&#34;: 1444, &#34;qoq_pct&#34;: 12.93944214599101, &#34;quarter&#34;: &#34;2026Q3&#34;}]}'></canvas></div>
+</section>
+
+<section class="card">
+  <h2><span class="ru">Карта: дома и районы</span><span class="en">Map: buildings and districts</span></h2>
+  <div id="map" data-type="apartment" data-district="Алатауский"></div>
+  <p id="map-status" class="muted note"></p>
+  <p class="muted note">
+    <span class="ru">Каждая точка — один дом, цвет — медиана ₸/м² по рыночным продажам; чем дальше масштаб, тем крупнее группы, при приближении они распадаются на отдельные дома.
+    Адреса есть только в файлах до 2024Q3 (в более новых файлах реестр адрес не публикует), поэтому свежие сделки на карте не показаны.
+    Положение найдено по данным OpenStreetMap: точное, по номеру дома без корпуса или по похожему названию улицы.</span>
+    <span class="en">Each dot is one building, coloured by the median ₸/m² of its market sales; zoomed out the dots merge into larger groups and split into single buildings as you zoom in.
+    Addresses exist only in the files up to 2024Q3 (newer files do not publish an address), so recent sales are not shown on the map.
+    Locations come from OpenStreetMap: exact, by the base house number, or by a similar street spelling.</span>
+  </p>
+</section>
+
+
+
+<section class="card">
+  <h2><span class="ru">Улицы по медианной цене за м²</span><span class="en">Streets by median price per m²</span></h2>
+  <p class="muted note">
+    <span class="ru">За последние 4 полных кв. (2025Q3–2026Q2), не менее 10 сделок.</span>
+    <span class="en">Last 4 full quarters (2025Q3–2026Q2), at least 10 deals.</span>
+  </p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>#</th><th><span class="ru">Улица</span><span class="en">Street</span></th><th><span class="ru">Район</span><span class="en">District</span></th><th class="r"><span class="ru">Медиана ₸/м²</span><span class="en">Median ₸/m²</span></th><th class="r"><span class="ru">Сделок</span><span class="en">Deals</span></th></tr></thead>
+    <tbody>
+    
+      <tr><td>1</td><td><a href="/kz-zillow/street/c32dad1baf.html"><span class="ru">проспект Райымбек</span><span class="en">Ave. Rayymbek</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">750 303</td><td class="r">258</td></tr>
+    
+      <tr><td>2</td><td><a href="/kz-zillow/street/c1d6d84e4e.html"><span class="ru">улица Сейдолла Бәйтереков</span><span class="en">St. Seydolla Bayterekov</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">631 868</td><td class="r">332</td></tr>
+    
+      <tr><td>3</td><td><a href="/kz-zillow/street/648397bee8.html"><span class="ru">улица Ырысты</span><span class="en">St. Yrysty</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">630 000</td><td class="r">590</td></tr>
+    
+      <tr><td>4</td><td><a href="/kz-zillow/street/ccabb5705b.html"><span class="ru">улица Немировича-Данченко</span><span class="en">St. Nemirovicha-Danchenko</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">601 504</td><td class="r">19</td></tr>
+    
+      <tr><td>5</td><td><a href="/kz-zillow/street/b6e8f45ab1.html"><span class="ru">улица Қадырғали Жалайыри</span><span class="en">St. Kadyrgali Zhalayyri</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">585 730</td><td class="r">30</td></tr>
+    
+      <tr><td>6</td><td><a href="/kz-zillow/street/0bff577bf1.html"><span class="ru">улица Устирт</span><span class="en">St. Ustirt</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">585 023</td><td class="r">12</td></tr>
+    
+      <tr><td>7</td><td><a href="/kz-zillow/street/c9f9e8850a.html"><span class="ru">микрорайон Ботакоз</span><span class="en">Microdistrict Botakoz</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">579 600</td><td class="r">23</td></tr>
+    
+      <tr><td>8</td><td><a href="/kz-zillow/street/e45eee963f.html"><span class="ru">улица Емцова</span><span class="en">St. Emtsova</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">570 175</td><td class="r">13</td></tr>
+    
+      <tr><td>9</td><td><a href="/kz-zillow/street/7c672c56e7.html"><span class="ru">улица Азербайжан Мамбетова</span><span class="en">St. Azerbayzhan Mambetova</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">555 520</td><td class="r">10</td></tr>
+    
+      <tr><td>10</td><td><a href="/kz-zillow/street/38636f9b93.html"><span class="ru">улица Аркалык</span><span class="en">St. Arkalyk</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">549 180</td><td class="r">51</td></tr>
+    
+      <tr><td>11</td><td><a href="/kz-zillow/street/dc4b0ded21.html"><span class="ru">микрорайон Аккент</span><span class="en">Microdistrict Akkent</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">543 941</td><td class="r">504</td></tr>
+    
+      <tr><td>12</td><td><a href="/kz-zillow/street/ed8db93c59.html"><span class="ru">микрорайон Гажайып</span><span class="en">Microdistrict Gazhayyp</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">524 591</td><td class="r">524</td></tr>
+    
+      <tr><td>13</td><td><a href="/kz-zillow/street/2239fe199a.html"><span class="ru">улица Северное Кольцо</span><span class="en">St. Severnoe Koltso</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">512 600</td><td class="r">366</td></tr>
+    
+      <tr><td>14</td><td><a href="/kz-zillow/street/fb424320ef.html"><span class="ru">улица Шарипова</span><span class="en">St. Sharipova</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">504 587</td><td class="r">117</td></tr>
+    
+      <tr><td>15</td><td><a href="/kz-zillow/street/d17a80efce.html"><span class="ru">улица Кокорай</span><span class="en">St. Kokoray</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">500 747</td><td class="r">19</td></tr>
+    
+      <tr><td>16</td><td><a href="/kz-zillow/street/4e6e990126.html"><span class="ru">проспект Рыскулова</span><span class="en">Ave. Ryskulova</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">499 743</td><td class="r">810</td></tr>
+    
+      <tr><td>17</td><td><a href="/kz-zillow/street/fb55e22f40.html"><span class="ru">микрорайон Саялы</span><span class="en">Microdistrict Sayaly</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">491 549</td><td class="r">160</td></tr>
+    
+      <tr><td>18</td><td><a href="/kz-zillow/street/54403fca59.html"><span class="ru">микрорайон Нуркент</span><span class="en">Microdistrict Nurkent</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">488 604</td><td class="r">2436</td></tr>
+    
+      <tr><td>19</td><td><a href="/kz-zillow/street/8f1d94c231.html"><span class="ru">улица Чуланова</span><span class="en">St. Chulanova</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">481 752</td><td class="r">71</td></tr>
+    
+      <tr><td>20</td><td><a href="/kz-zillow/street/bba0b2e981.html"><span class="ru">микрорайон Акбулак</span><span class="en">Microdistrict Akbulak</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">476 664</td><td class="r">22</td></tr>
+    
+      <tr><td>21</td><td><a href="/kz-zillow/street/14e99d2c4e.html"><span class="ru">улица Кисловодская</span><span class="en">St. Kislovodskaya</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">475 977</td><td class="r">12</td></tr>
+    
+      <tr><td>22</td><td><a href="/kz-zillow/street/4868cdb747.html"><span class="ru">микрорайон Зердели</span><span class="en">Microdistrict Zerdeli</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">472 896</td><td class="r">218</td></tr>
+    
+      <tr><td>23</td><td><a href="/kz-zillow/street/22d82045d0.html"><span class="ru">улица Омарова</span><span class="en">St. Omarova</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">471 496</td><td class="r">1177</td></tr>
+    
+      <tr><td>24</td><td><a href="/kz-zillow/street/3334f8828a.html"><span class="ru">улица Головацкого</span><span class="en">St. Golovatskogo</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">463 137</td><td class="r">28</td></tr>
+    
+      <tr><td>25</td><td><a href="/kz-zillow/street/edd56ed0d7.html"><span class="ru">микрорайон Дарабоз</span><span class="en">Microdistrict Daraboz</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">456 493</td><td class="r">1709</td></tr>
+    
+      <tr><td>26</td><td><a href="/kz-zillow/street/5bc4209db7.html"><span class="ru">улица Суатколь</span><span class="en">St. Suatkol</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">452 184</td><td class="r">18</td></tr>
+    
+      <tr><td>27</td><td><a href="/kz-zillow/street/c6473e4328.html"><span class="ru">микрорайон Мадениет</span><span class="en">Microdistrict Madeniet</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">440 746</td><td class="r">18</td></tr>
+    
+      <tr><td>28</td><td><a href="/kz-zillow/street/cb2b3a5295.html"><span class="ru">улица Василия Бенберина</span><span class="en">St. Vasiliya Benberina</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">422 273</td><td class="r">12</td></tr>
+    
+      <tr><td>29</td><td><a href="/kz-zillow/street/fb59f2904d.html"><span class="ru">микрорайон 13</span><span class="en">Microdistrict 13</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">420 356</td><td class="r">18</td></tr>
+    
+      <tr><td>30</td><td><a href="/kz-zillow/street/8bab28e7fd.html"><span class="ru">микрорайон 20</span><span class="en">Microdistrict 20</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">413 923</td><td class="r">541</td></tr>
+    
+      <tr><td>31</td><td><a href="/kz-zillow/street/ae2252ad03.html"><span class="ru">улица Жапсарбаева</span><span class="en">St. Zhapsarbaeva</span></a></td>
+          <td><span class="ru">Алатауский</span><span class="en">Alatau</span></td><td class="r">403 226</td><td class="r">181</td></tr>
+    
+    </tbody>
+  </table></div>
+</section>
+
+</main>
+<footer>
+  Source: <a href="https://ashyq.data.gov.kz" rel="noopener">ЕГКН via Smart Data Ukimet / ashyq.data.gov.kz</a>,
+  <a href="https://creativecommons.org/licenses/by/3.0/" rel="noopener">CC BY 3.0</a>
+  · Map © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a> contributors
+ · <span class="ru">Статическая копия от 2026-11-07: поиск и карта работают в браузере.</span><span class="en">Static copy from 2026-11-07: search and map run in your browser.</span>
+</footer>
+<script src="/kz-zillow/static/app.js"></script>
+</body>
+</html>
